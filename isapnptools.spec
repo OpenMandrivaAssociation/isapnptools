@@ -1,7 +1,7 @@
 Summary:	Utilities for configuring ISA Plug-and-Play (PnP) devices
 Name:		isapnptools
 Version:	1.26
-Release:	%mkrel 9
+Release:	%mkrel 10
 License:	GPL
 Group:		System/Configuration/Hardware
 URL:		ftp://ftp.demon.co.uk/pub/unix/linux/utils/
