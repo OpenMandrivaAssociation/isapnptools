@@ -10,6 +10,7 @@ Patch1:		%{name}-demo2.patch
 Patch2:		isapnptools-1.26-gcc4-fix.patch
 ExclusiveArch:	%{ix86} alpha
 BuildRequires:	flex
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 The isapnptools package contains utilities for configuring ISA
