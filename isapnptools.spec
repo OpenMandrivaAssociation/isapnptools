@@ -1,13 +1,14 @@
 Summary:	Utilities for configuring ISA Plug-and-Play (PnP) devices
 Name:		isapnptools
 Version:	1.26
-Release:	%mkrel 11
+Release:	%mkrel 12
 License:	GPL
 Group:		System/Configuration/Hardware
 URL:		ftp://ftp.demon.co.uk/pub/unix/linux/utils/
 Source0:	%{name}-%{version}.tar.bz2
 Patch1:		%{name}-demo2.patch
 Patch2:		isapnptools-1.26-gcc4-fix.patch
+Patch3:		isapnptools-1.26-format_not_a_string_literal_and_no_format_arguments.diff
 ExclusiveArch:	%{ix86} alpha
 BuildRequires:	flex
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -65,11 +66,13 @@ cards.
 %setup -q
 %patch1 -p1
 %patch2 -p1 -b .gcc4
+%patch3 -p0 -b .format_not_a_string_literal_and_no_format_arguments
+
 find | xargs chmod u+w
 
 %build
 %configure --sbindir=/sbin
-make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
+make RPM_OPT_FLAGS="%{optflags}"
 perl -pi -e "s/^\([^#]\)/#\1/" etc/isapnp.gone
 %ifarch alpha
 perl -pi -e "s/#IRQ 7/IRQ 7/" etc/isapnp.gone
