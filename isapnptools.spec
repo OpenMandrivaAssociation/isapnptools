@@ -1,17 +1,16 @@
 Summary:	Utilities for configuring ISA Plug-and-Play (PnP) devices
 Name:		isapnptools
-Version:	1.26
-Release:	%mkrel 16
+Version:	1.27
+Release:	%mkrel 1
 License:	GPL
 Group:		System/Configuration/Hardware
-URL:		ftp://ftp.demon.co.uk/pub/unix/linux/utils/
-Source0:	%{name}-%{version}.tar.bz2
+URL:		http://www.roestock.demon.co.uk/isapnptools/
+Source0:	ftp://metalab.unc.edu/pub/Linux/system/hardware/%{name}-%{version}.tgz
 Patch1:		%{name}-demo2.patch
-Patch2:		isapnptools-1.26-gcc4-fix.patch
+Patch2:		isapnptools-1.27-include.patch
 Patch3:		isapnptools-1.26-format_not_a_string_literal_and_no_format_arguments.diff
-ExclusiveArch:	%{ix86} alpha
+
 BuildRequires:	flex
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 The isapnptools package contains utilities for configuring ISA
@@ -65,13 +64,13 @@ cards.
 
 %setup -q
 %patch1 -p1
-%patch2 -p1 -b .gcc4
+%patch2 -p0
 %patch3 -p0 -b .format_not_a_string_literal_and_no_format_arguments
 
 find | xargs chmod u+w
 
 %build
-%configure --sbindir=/sbin
+%configure2_5x --sbindir=/sbin
 make RPM_OPT_FLAGS="%{optflags}"
 perl -pi -e "s/^\([^#]\)/#\1/" etc/isapnp.gone
 %ifarch alpha
@@ -83,9 +82,6 @@ rm -rf %{buildroot}
 
 %makeinstall_std
 install -m644 etc/isapnp.gone -D %{buildroot}%{_sysconfdir}/isapnp.gone
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,755)
@@ -100,5 +96,3 @@ rm -rf %{buildroot}
 %doc AUTHORS COPYING NEWS doc
 %{_libdir}/*.a
 %{_includedir}/isapnp
-
-
