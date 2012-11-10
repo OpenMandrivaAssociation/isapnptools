@@ -1,0 +1,11 @@
+--- src/callbacks.c	2008-12-21 15:02:29.000000000 +0100
++++ src/callbacks.c.oden	2008-12-21 15:02:20.000000000 +0100
+@@ -124,7 +124,7 @@ normal_non_fatal_error_callback(int in_e
+ 	    in_isapnp_error, strerror(in_errno));
+   }
+   else if (ISAPNP_E_PRINT_PROGRESS_REPORT_BUF == in_isapnp_error) {
+-    fprintf(stderr, progress_report_buf);
++    fprintf(stderr, "%s", progress_report_buf);
+   }
+   else {
+     if (0 == in_errno) {

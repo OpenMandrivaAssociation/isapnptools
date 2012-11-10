@@ -1,0 +1,20 @@
+--- blah/demos/demo2.c	Thu Apr 20 23:54:31 2000
++++ blah/demos/demo2.c.new	Fri Jun 23 18:31:28 2000
+@@ -62,7 +62,7 @@
+ ** prints the device ID in a more human-readable form.
+ */
+ 
+-char *
++static char *
+ devidstr(unsigned char d1, unsigned char d2,
+ 	 unsigned char d3, unsigned char d4);
+ 
+@@ -174,7 +174,7 @@
+ /* Auxiliary procedures - used by inspect_resource().
+ */
+ 
+-char *
++static char *
+ devidstr(unsigned char d1, unsigned char d2,
+ 	 unsigned char d3, unsigned char d4)
+ {
