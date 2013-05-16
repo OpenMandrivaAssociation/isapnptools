@@ -1,5 +1,5 @@
---- src/callbacks.c	2008-12-21 15:02:29.000000000 +0100
-+++ src/callbacks.c.oden	2008-12-21 15:02:20.000000000 +0100
+--- ./src/callbacks.c	2008-12-21 15:02:29.000000000 +0100
++++ ./src/callbacks.c.oden	2008-12-21 15:02:20.000000000 +0100
 @@ -124,7 +124,7 @@ normal_non_fatal_error_callback(int in_e
  	    in_isapnp_error, strerror(in_errno));
    }

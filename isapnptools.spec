@@ -1,10 +1,10 @@
 Summary:	Utilities for configuring ISA Plug-and-Play (PnP) devices
 Name:		isapnptools
 Version:	1.27
-Release:	%mkrel 1
-License:	GPL
+Release:	1
+License:	GPLv2
 Group:		System/Configuration/Hardware
-URL:		http://www.roestock.demon.co.uk/isapnptools/
+Url:		http://www.roestock.demon.co.uk/isapnptools/
 Source0:	ftp://metalab.unc.edu/pub/Linux/system/hardware/%{name}-%{version}.tgz
 Patch1:		%{name}-demo2.patch
 Patch2:		isapnptools-1.27-include.patch
@@ -39,52 +39,29 @@ Summary:	Devel libraries for configuring ISA Plug-and-Play (PnP) devices
 Group:		Development/C
 
 %description	devel
-The isapnptools package contains utilities for configuring ISA
-Plug-and-Play (PnP) cards which are in compliance with the PnP ISA
-Specification Version 1.0a.  ISA PnP cards use registers instead of
-jumpers for setting the board address and interrupt assignments.  The
-cards also contain descriptions of the resources which need to be
-allocated.  The BIOS on your system, or isapnptools, uses a protocol
-described in the specification to find all of the PnP boards and
-allocate the resources so that none of them conflict.
-
-Note that the BIOS doesn't do a very good job of allocating resources.
-So isapnptools is suitable for all systems, whether or not they
-include a PnP BIOS. In fact, a PnP BIOS adds some complications.  A
-PnP BIOS may already activate some cards so that the drivers can find
-them.  Then these tools can unconfigure them or change their settings,
-causing all sorts of nasty effects. If you have PnP network cards that
-already work, you should read through the documentation files very
-carefully before you use isapnptools.
-
 Install isapnptools-devel if you need to do development with ISA PnP
 cards.
 
 %prep
 
 %setup -q
-%patch1 -p1
-%patch2 -p0
-%patch3 -p0 -b .format_not_a_string_literal_and_no_format_arguments
+%apply_patches
 
 find | xargs chmod u+w
 
 %build
 %configure2_5x --sbindir=/sbin
 make RPM_OPT_FLAGS="%{optflags}"
-perl -pi -e "s/^\([^#]\)/#\1/" etc/isapnp.gone
+sed -i -e "s/^\([^#]\)/#\1/" etc/isapnp.gone
 %ifarch alpha
-perl -pi -e "s/#IRQ 7/IRQ 7/" etc/isapnp.gone
+sed -i -e "s/#IRQ 7/IRQ 7/" etc/isapnp.gone
 %endif 
 
 %install
-rm -rf %{buildroot}
-
 %makeinstall_std
 install -m644 etc/isapnp.gone -D %{buildroot}%{_sysconfdir}/isapnp.gone
 
 %files
-%defattr(-,root,root,755)
 %doc README
 %doc config-scripts/YMH0021
 %config(missingok,noreplace) %attr(0644,root,root) %{_sysconfdir}/isapnp.gone
@@ -92,7 +69,7 @@ install -m644 etc/isapnp.gone -D %{buildroot}%{_sysconfdir}/isapnp.gone
 %{_mandir}/man*/*
 
 %files devel
-%defattr(-,root,root,755)
 %doc AUTHORS COPYING NEWS doc
 %{_libdir}/*.a
 %{_includedir}/isapnp
+
