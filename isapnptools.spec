@@ -1,7 +1,7 @@
 Summary:	Utilities for configuring ISA Plug-and-Play (PnP) devices
 Name:		isapnptools
 Version:	1.27
-Release:	9
+Release:	10
 License:	GPLv2
 Group:		System/Configuration/Hardware
 Url:		http://www.roestock.demon.co.uk/isapnptools/
