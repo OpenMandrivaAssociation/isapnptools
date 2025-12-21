@@ -10,6 +10,11 @@ Patch1:		%{name}-demo2.patch
 Patch2:		isapnptools-1.27-include.patch
 Patch3:		isapnptools-1.26-format_not_a_string_literal_and_no_format_arguments.diff
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	flex
 
 %description
